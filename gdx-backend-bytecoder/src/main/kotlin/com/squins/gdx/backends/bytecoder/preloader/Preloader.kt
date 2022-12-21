@@ -72,7 +72,6 @@ class Preloader(private val baseUrl:String) {
             // DISABLED: performance println("asset.file)
             if (alreadyDownloaded(asset.file)) {
                 // DISABLED: performance println("true")
-                asset.bytesLoaded = asset.sizeInBytes
                 asset.succeed = true
                 continue
             }

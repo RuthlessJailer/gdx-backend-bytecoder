@@ -1,6 +1,7 @@
 package com.squins.gdx.backends.bytecoder.preloader
 
 import com.badlogic.gdx.utils.GdxRuntimeException
+import com.squins.gdx.backends.bytecoder.printd
 import de.mirkosertic.bytecoder.api.web.*
 
 @Suppress("UNCHECKED_CAST")
@@ -10,6 +11,7 @@ class AssetDownloader {
     fun load(url: String, type: AssetType, mimeType: String, listener: AssetLoaderListener<*>) {
         // DISABLED: performance println("Called AssetDownloader.load($url) type is ${type.code} mimetype is $mimeType listener is $listener")
         // DISABLED: performance println("(type == AssetFilter.AssetType.Image)
+        printd("Fetching [$url]")
         when (type.code) {
             AssetType.Text.code -> {
                 loadText(url, listener as AssetLoaderListener<String>)
@@ -31,22 +33,26 @@ class AssetDownloader {
 
     }
 
-    private fun loadBinary(url: String, listener: AssetLoaderListener<Blob>) {}
+    private fun loadBinary(url: String, listener: AssetLoaderListener<Blob>) {
+        printd("LoadBinary()")
+        listener.onSuccess(Blob(OpaqueArrays.createInt8Array(0)))
+    }
 
     fun loadText(url: String, listener: AssetLoaderListener<String>) {
+        printd("LoadText()")
         val w = Window.window()
         val c = Console.console()
         val fetched = arrayOfNulls<Any>(0)
-        c.log("Fetching: [$url]")
+//        c.log("Fetching: [$url]")
         w.fetch(url).then { response ->
-            c.log("Data received")
+//            c.log("Data received")
             response.text().then { responseText ->
-                c.log("String data is $responseText")
+//                c.log("String data is $responseText")
                 fetched[0] = "ok"
                 listener.onSuccess(responseText)
             }
         }
-        c.log("Fetched")
+//        c.log("Fetched")
         var counter = 0
         while (fetched[0] == null && counter++ < 1000) {
             c.log("Waiting")
@@ -72,6 +78,7 @@ class AssetDownloader {
     }
 
     private fun loadAudio(url: String, listener: AssetLoaderListener<HTMLAudioElement>) {
+        printd("LoadAudio()")
         val audio = createAudio()
         audio.addEventListener<Event>("canplaythrough") { listener.onSuccess(audio) }
         audio.setSrc(url)
@@ -95,7 +102,7 @@ class AssetDownloader {
     }
 
     private fun loadImage(url: String, mimeType: String, listener: AssetLoaderListener<HTMLImageElement>) {
-        // DISABLED: performance println("("loadImage")
+        printd("LoadImage()")
         loadImage(url, mimeType, null, listener)
     }
 

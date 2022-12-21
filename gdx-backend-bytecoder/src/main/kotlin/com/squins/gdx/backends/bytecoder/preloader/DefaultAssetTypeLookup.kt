@@ -15,7 +15,7 @@ class DefaultAssetTypeLookup : AssetTypeLookup {
             extension == "jpg" || extension == "jpeg" || extension == "png" || extension == "bmp" || extension == "gif"
 
     private fun isText(extension: String): Boolean =
-            extension == "json" || extension == "xml" || extension == "txt" || extension == "glsl" || extension == "fnt" || extension == "pack" || extension == "obj" || extension == "atlas" || extension == "g3dj"
+            extension == "json" || extension == "xml" || extension == "txt" || extension == "glsl" || extension == "fnt" || extension == "pack" || extension == "obj" || extension == "atlas" || extension == "g3dj" || extension == "tmx"
 
     private fun isAudio(extension: String): Boolean = extension == "mp3" || extension == "ogg" || extension == "wav"
 

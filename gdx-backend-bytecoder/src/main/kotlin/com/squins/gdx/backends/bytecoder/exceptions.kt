@@ -9,3 +9,8 @@ fun makeAndLogIllegalArgumentException(tag:String, message:String): IllegalArgum
 fun printErr(errorMsg:String){
     System.err.println(errorMsg)
 }
+
+var DEBUG = true
+fun printd(str: String){
+    if(DEBUG) println(str)
+}

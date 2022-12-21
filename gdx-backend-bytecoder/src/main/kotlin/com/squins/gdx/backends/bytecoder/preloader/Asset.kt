@@ -8,6 +8,12 @@ data class Asset(val file: String,
 
     val shouldPreload = preloadEnabled || file.startsWith("com/badlogic/")
     var succeed = false
+        set(value) {
+            if(value) {
+                field = true
+                bytesLoaded = sizeInBytes
+            }
+        }
     var failed = false
     var downloadStarted = false
     var bytesLoaded: Long = 0

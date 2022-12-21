@@ -36,7 +36,7 @@ class BytecoderApplication(private var listener: ApplicationListener,
     private val lifecycleListeners = mutableListOf<LifecycleListener>()
 
     init {
-        // DISABLED: performance println("Init")
+        printd("Init")
 
         Gdx.app = this
         preloader = Preloader(assetBaseUrl)
@@ -47,25 +47,26 @@ class BytecoderApplication(private var listener: ApplicationListener,
         audio = BytecoderAudio(libgdxAppCanvas)
         input = BytecoderInput(libgdxAppCanvas, config)
 
-        // DISABLED: performance println("Init gl")
+        printd("Init gl")
         Gdx.gl = bytecoderGL20
-        // DISABLED: performance println("Init gl20")
+        printd("Init gl20")
         Gdx.gl20 = bytecoderGL20
-        // DISABLED: performance println("Init audio")
+        printd("Init audio")
         Gdx.audio = audio
-        // DISABLED: performance println("Before Gdx.files")
+        printd("Before Gdx.files")
         Gdx.files = files
-        // DISABLED: performance println("Before Gdx.graphics")
+        printd("Before Gdx.graphics")
         Gdx.graphics = graphics
-        // DISABLED: performance println("Before Gdx.input")
+        printd("Before Gdx.input")
         Gdx.input = input
 
-        // DISABLED: performance println("Calling preloadAssets()")
+        printd("Calling preloadAssets()")
         preloadAssets()
     }
 
 
     fun setupLoop(){
+        printd("setupMainLoop()")
         try {
             listener.create()
             listener.resize(graphics.width, graphics.height)
@@ -87,7 +88,7 @@ class BytecoderApplication(private var listener: ApplicationListener,
     }
 
     fun mainLoop(){
-        // DISABLED: performance println("mainLoop")
+        printd("mainLoop")
         graphics.update()
         if (Gdx.graphics.width != lastWidth || Gdx.graphics.height != lastHeight) {
             lastWidth = graphics.width
@@ -212,18 +213,19 @@ class BytecoderApplication(private var listener: ApplicationListener,
     }
 
     private fun preloadAssets() {
-        // DISABLED: performance println("("preloadAssets")
+        printd("preloadAssets")
         val logoPreloaderCallback: PreloaderCallback = preloaderPanelCallbackWithLogo()
-        // DISABLED: performance println("("PreloaderCallback.getPreloaderCallback created, creating assetFileUrl")
+        printd("PreloaderCallback.getPreloaderCallback created, creating assetFileUrl")
         val assetFileUrl = "$assetBaseUrl/assets.txt"
 
         val delegatingToLogoCallback = object : PreloaderCallback {
             override fun error(file: String) {
-                // DISABLED: performance println("("file $file")
+                printd("file $file")
                 logoPreloaderCallback.error(file)
             }
 
             override fun update(state: PreloaderState) {
+//                printd("update PreloaderState delegate")
                 logoPreloaderCallback.update(state)
                 if (state.hasEnded()) {
 //                    getRootPanel().clear()
@@ -232,18 +234,18 @@ class BytecoderApplication(private var listener: ApplicationListener,
                 }
             }
         }
-        // DISABLED: performance println("("Created delegating callback")
-        // DISABLED: performance println("("preloader.preload: $assetFileUrl")
+        printd("Created delegating callback")
+        printd("preloader.preload: $assetFileUrl")
         preloader.preload(assetFileUrl, delegatingToLogoCallback)
     }
 
     private fun preloaderPanelCallbackWithLogo(): PreloaderCallback {
-        // DISABLED: performance println("("getPreloaderCallback")
+        printd("getPreloaderCallback")
         return createPreloaderPanel( "$assetBaseUrl/logo.png")
     }
 
     private fun createPreloaderPanel(logoUrl: String): PreloaderCallback {
-        // DISABLED: performance println("("createPreloaderPanel")
+        printd("createPreloaderPanel")
 //        val preloaderPanel: Panel = VerticalPanel()
 //        preloaderPanel.setStyleName("gdx-preloader")
 //        val logo = Image(logoUrl)
@@ -263,7 +265,7 @@ class BytecoderApplication(private var listener: ApplicationListener,
             }
 
             override fun update(state: PreloaderState) {
-                println("update PreloaderState")
+                //printd("update PreloaderState callback")
 //                meterStyle.setWidth(100f * state.progress, Unit.PCT)
             }
         }

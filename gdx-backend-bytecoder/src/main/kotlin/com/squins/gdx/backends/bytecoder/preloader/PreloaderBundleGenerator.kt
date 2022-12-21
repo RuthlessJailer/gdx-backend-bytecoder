@@ -28,7 +28,12 @@ class PreloaderBundleGenerator(private val assetSourceDirectory: File, private v
             .filter { it.isFile }
             .map {
                 Asset(
-                        file=it.name,
+                        file=it.canonicalPath.let { f ->
+                            val dir = directory.canonicalPath
+                            if (f.startsWith(dir))
+                                f.substring(dir.length + 1).replace('\\', '/')
+                            else f
+                        },
                         type= getAssetType(it),
                         sizeInBytes = it.length(),
                         mimeType = tika.detect(it),
