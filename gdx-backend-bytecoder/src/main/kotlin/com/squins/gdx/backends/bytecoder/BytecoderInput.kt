@@ -158,7 +158,15 @@ class BytecoderInput (val canvas: LibgdxAppCanvas,
         throw makeAndLogIllegalArgumentException("BytecoderInput", "Not yet implemented")
     }
 
+    override fun getTextInput(listener: Input.TextInputListener?, title: String?, text: String?, hint: String?, type: Input.OnscreenKeyboardType?) {
+        throw makeAndLogIllegalArgumentException("BytecoderInput", "Not yet implemented")
+    }
+
     override fun setOnscreenKeyboardVisible(visible: Boolean) {
+        throw makeAndLogIllegalArgumentException("BytecoderInput", "Not yet implemented")
+    }
+
+    override fun setOnscreenKeyboardVisible(visible: Boolean, type: Input.OnscreenKeyboardType?) {
         throw makeAndLogIllegalArgumentException("BytecoderInput", "Not yet implemented")
     }
 

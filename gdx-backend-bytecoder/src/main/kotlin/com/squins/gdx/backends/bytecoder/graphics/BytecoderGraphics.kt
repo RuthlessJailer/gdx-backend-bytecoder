@@ -63,6 +63,10 @@ class BytecoderGraphics(private val libgdxAppCanvas: LibgdxAppCanvas) : Graphics
         TODO("Not yet implemented")
     }
 
+    override fun getBackBufferScale(): Float {
+        TODO("Not yet implemented")
+    }
+
     override fun getSafeInsetLeft(): Int {
         TODO("Not yet implemented")
     }
@@ -176,6 +180,10 @@ class BytecoderGraphics(private val libgdxAppCanvas: LibgdxAppCanvas) : Graphics
     }
 
     override fun setVSync(vsync: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setForegroundFPS(fps: Int) {
         TODO("Not yet implemented")
     }
 

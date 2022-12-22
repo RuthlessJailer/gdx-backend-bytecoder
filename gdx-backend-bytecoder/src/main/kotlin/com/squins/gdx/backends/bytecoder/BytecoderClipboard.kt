@@ -3,6 +3,9 @@ package com.squins.gdx.backends.bytecoder
 import com.badlogic.gdx.utils.Clipboard
 
 class BytecoderClipboard : Clipboard {
+    override fun hasContents(): Boolean = false
+
+
     override fun getContents(): String {
         // not implemented
         return ""

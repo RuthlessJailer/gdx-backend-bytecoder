@@ -9,10 +9,10 @@ import de.mirkosertic.bytecoder.api.web.HTMLElement
 interface HTMLDivElement : HTMLElement {
 
     @OpaqueProperty
-    fun clientWidth(): Int
+    override fun clientWidth(): Int
 
     @OpaqueProperty
-    fun clientHeight(): Int
+    override fun clientHeight(): Int
 
     @OpaqueProperty
     fun style(style: String)
